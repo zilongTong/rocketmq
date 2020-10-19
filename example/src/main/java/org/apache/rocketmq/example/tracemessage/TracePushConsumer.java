@@ -29,12 +29,12 @@ import org.apache.rocketmq.common.message.MessageExt;
 public class TracePushConsumer {
     public static void main(String[] args) throws InterruptedException, MQClientException {
         // Here,we use the default message track trace topic name
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("CID_JODIE_1",true);
-        consumer.subscribe("TopicTest", "*");
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer("CID_JODIE_1",true);
+        defaultMQPushConsumer.subscribe("TopicTest", "*");
+        defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         // Wrong time format 2017_0422_221800
-        consumer.setConsumeTimestamp("20181109221800");
-        consumer.registerMessageListener(new MessageListenerConcurrently() {
+        defaultMQPushConsumer.setConsumeTimestamp("20181109221800");
+        defaultMQPushConsumer.registerMessageListener(new MessageListenerConcurrently() {
 
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
@@ -42,7 +42,7 @@ public class TracePushConsumer {
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
-        consumer.start();
+        defaultMQPushConsumer.start();
         System.out.printf("Consumer Started.%n");
     }
 }

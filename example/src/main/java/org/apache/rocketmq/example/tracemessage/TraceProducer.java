@@ -30,6 +30,7 @@ public class TraceProducer {
         producer.start();
 
         for (int i = 0; i < 128; i++)
+            
             try {
                 {
                     Message msg = new Message("TopicTest",
